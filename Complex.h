@@ -18,7 +18,8 @@ public:
     Complex(real arg1, real arg2, bool isTrygonometric = false):a(arg1), b(arg2)
     {
         if(isTrygonometric) {
-
+		a = arg1*cos(arg2);
+		b = arg1*sin(arg2);
         }
      }
 
@@ -65,13 +66,10 @@ public:
         return Complex(cos(k*arg()), sin(k*arg()))*pow(modulus(), k);
     }
 
-
     // Cout operator
     friend ostream & operator<< (ostream &out, const Complex &c) {
         return out << c.a << " + " << c.b << "i";
         }
 };
-
-
 
 #endif // COMPLEX_H_INCLUDED
