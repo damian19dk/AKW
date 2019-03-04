@@ -18,8 +18,8 @@ public:
     Complex(real arg1, real arg2, bool isTrygonometric = false):a(arg1), b(arg2)
     {
         if(isTrygonometric) {
-		a = arg1*cos(arg2);
-		b = arg1*sin(arg2);
+            a = arg1*cos(arg2);
+            b = arg1*sin(arg2);
         }
      }
 
@@ -35,6 +35,11 @@ public:
 
     Complex operator+(Complex arg1) {
         return Complex(a + arg1.a, b + arg1.b);
+    }
+
+    void operator+=(Complex arg1) {
+        a += arg1.a;
+        b += arg1.b;
     }
 
     // Substrating
@@ -68,7 +73,7 @@ public:
 
     // Cout operator
     friend ostream & operator<< (ostream &out, const Complex &c) {
-        return out << c.a << " + " << c.b << "i";
+        return out << "(" << c.a << "," << c.b << ")";
         }
 };
 
