@@ -5,6 +5,7 @@
 #include<cmath>
 
 typedef double real;
+typedef unsigned int ui;
 
 using namespace std;
 

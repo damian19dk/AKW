@@ -1,25 +1,28 @@
 #ifndef VECTOR_H_INCLUDED
 #define VECTOR_H_INCLUDED
 
-#include <iostream>
+#include <string.h>
+#include "Complex.h"
+
 
 using namespace std;
 
-typedef double real;
-
-
-template <typename T, int SIZE>
+template <ui SIZE>
 class Vector {
 public:
-    T vec_array[SIZE];
-    unsigned int length;
+    ui length;
+    Complex vec_array[SIZE];
 
     Vector():length(SIZE) {}
-    Vector(T* vec):length(SIZE) {
-        for(unsigned int i = 0; i < length; i++) {
-            vec_array[i] = vec[i];
-        }
+    Vector(Complex* vec):length(SIZE) {
+        memcpy(vec_array,vec, sizeof(Complex)*SIZE);
     }
+
+    Vector(const Vector& vec):length(vec.length) {
+        for(unsigned int i = 0; i < length; i++)
+            vec_array[i] = vec.vec_array[i];
+    }
+
     ~Vector() {}
 
     Vector operator+(Vector arg1) {
@@ -36,18 +39,18 @@ public:
         return vec;
     }
 
-    T scalar (Vector arg1) {
-        T sum;
+    Complex scalar (Vector arg1) {
+        Complex sum;
         for(unsigned int i = 0; i < length; i++)
             sum += vec_array[i]*arg1.vec_array[i].conjugate();
         return sum;
     }
 
-    T norma() {
+    Complex norma() {
         return Complex(sqrt(this->scalar(*this).re()),0);
     }
 
-        // Cout operator
+    // Cout operator
     friend ostream & operator<< (ostream &out, const Vector &c) {
         out << "[ ";
         for(unsigned int i = 0; i < c.length; i++)
