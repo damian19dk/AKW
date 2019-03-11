@@ -1,28 +1,12 @@
 #include <iostream>
 #include "Vector.h"
+#include "Qubit.h"
 
 using namespace std;
 
 int main()
 {
-    Vector<3> v1, v2, v3;
-    Complex w1[3] = {Complex(1,1), Complex(2,2), Complex(3,3)};
-    v1 = Vector<3>(w1);
-    v2 = Vector<3>(w1);
-
-
-    v3 = v1 + v2;
-    cout << v1 << " + " << v2 << " = " << v3 << endl;
-
-
-    v3 = v1*5;
-    cout << v1 << " * " << 5 << " = " << v3 << endl;
-
-    Complex scalar = v1.scalar(v2);
-    cout << "<" << v1 << "|" << v2 << "> = " << scalar << endl;
-
-    scalar = v1.norma();
-    cout << "||" << v1 << "|| = " << scalar << endl;
-
+    Qubit q;
+    cout << q << endl;
     return 0;
 }

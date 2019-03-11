@@ -47,10 +47,9 @@ public:
     }
 
     Complex norma() {
-        return Complex(sqrt(this->scalar(*this).re()),0);
+        return Complex(sqrt(this->scalar(*this).re()),sqrt((this->scalar(*this).im())));
     }
 
-    // Cout operator
     friend ostream & operator<< (ostream &out, const Vector &c) {
         out << "[ ";
         for(unsigned int i = 0; i < c.length; i++)
