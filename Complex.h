@@ -32,8 +32,6 @@ public:
     real modulus() { return sqrt(a*a + b*b); }
     Complex conjugate() { return Complex(a, -b); }
 
-    // Adding
-
     Complex operator+(Complex arg1) {
         return Complex(a + arg1.a, b + arg1.b);
     }
@@ -43,13 +41,9 @@ public:
         b += arg1.b;
     }
 
-    // Substrating
-
     Complex operator-(Complex arg1) {
         return Complex(a - arg1.a, b - arg1.b);
     }
-
-    // Multiplying
 
     Complex operator*(Complex arg1) {
         return Complex(a*arg1.a - b*arg1.b, a*arg1.b + b*arg1.a);
@@ -59,20 +53,14 @@ public:
         return Complex(a*arg1, b*arg1);
     }
 
-    // Dividing
-
     Complex operator/(Complex arg1) {
         return Complex((a*arg1.a + b*arg1.b)/(arg1.a*arg1.a + arg1.b*arg1.b), (b*arg1.a - a*arg1.b)/(arg1.a*arg1.a + arg1.b*arg1.b));
     }
-
-
-    // Powering to natural number
 
     Complex operator^(int k) {
         return Complex(cos(k*arg()), sin(k*arg()))*pow(modulus(), k);
     }
 
-    // Cout operator
     friend ostream & operator<< (ostream &out, const Complex &c) {
         return out << "(" << c.a << "," << c.b << ")";
         }
