@@ -13,17 +13,37 @@ public:
     Qubit() {
         int BASE = 10000000;
         srand(time(NULL));
-        int a,b,c,d;
+        int val[4];
 
-        a = rand()%(BASE+1);
-        b = rand()%(a + 1);
-        c = rand()%(BASE - (a + b) + 1);
-        d = rand()%(BASE - (a + b + c) + 1);
+        val[0] = rand()%(BASE+1);
+        val[1] = rand()%(val[0] + 1);
+        val[2] = rand()%(BASE - (val[0] + val[1]) + 1);
+        val[3] = rand()%(BASE - (val[0] + val[1] + val[2]) + 1);
 
-        values[0].a = sqrt(a/static_cast<real>(BASE));
-        values[0].b = sqrt(b/static_cast<real>(BASE));
-        values[1].a = sqrt(c/static_cast<real>(BASE));
-        values[1].b = sqrt(d/static_cast<real>(BASE));
+        int r[4] = {-1, -2, -3 ,-4};
+        int i = 0;
+        bool withoutRepeat = true;
+        while(i < 4) {
+            r[i] = rand()%4;
+
+            for(int j = 0; j < i; j++) {
+                if(r[j] == r[i]) {
+                    withoutRepeat = false;
+                    break;
+                }
+                else
+                    withoutRepeat = true;
+            }
+            if(withoutRepeat) {
+                i++;
+                withoutRepeat = false;
+            }
+        }
+
+        values[0].a = sqrt(val[r[0]]/static_cast<real>(BASE));
+        values[0].b = sqrt(val[r[1]]/static_cast<real>(BASE));
+        values[1].a = sqrt(val[r[2]]/static_cast<real>(BASE));
+        values[1].b = sqrt(val[r[3]]/static_cast<real>(BASE));
 
     }
     Qubit(Complex a, Complex b) {
@@ -98,7 +118,16 @@ public:
     }
 
     real measureNeumann() {
-        return 1;
+        real alpha = values[0].modulus()*values[0].modulus();
+        int BASE = 10000000;
+        if(alpha >= (rand()%(BASE + 1))/static_cast<real>(BASE))
+            return 1;
+        else
+            return 0;
+    }
+
+    real alphaPropability() {
+        return values[0].modulus()*values[0].modulus();
     }
 
     friend ostream & operator<< (ostream &out, const Qubit &q) {
